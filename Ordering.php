@@ -8,14 +8,14 @@ interface Checkout {
     public function sellers(): CheckoutSellerCollection;
     public function addProduct(string $productId, int $amount = 1): static;
     public function deleteProduct(string $productId): static;
-    public function setProductAmount(string $productId, int $amount): static;
-    public function setVoucher($voucherId);
-    public function getVoucher($voucherId);
+    public function updateProductAmount(string $productId, int $amount): static;
+    public function updateVoucher($voucherId);
+    public function voucher(): string;
     public function sum(): Money;
-    public function setBillingAddress(Address $address);
-    public function getBillingAddress(): ?Address;
-    public function setDeliveryAddress(Address $address);
-    public function getDeliveryAddress(): ?Address;
+    public function updateBillingAddress(Address $address);
+    public function billingAddress(): ?Address;
+    public function updateDeliveryAddress(Address $address);
+    public function deliveryAddress(): ?Address;
     public function checkout(): Order;
 }
 interface CheckoutSellerCollection{}
@@ -40,12 +40,12 @@ interface OrderRepostiory {
     public function save(Order $order);
 }
 interface Order {
-    public function getSum(): Money;
-    public function setSum(): Money;
-    public function setBillingAddress(Address $address);
-    public function getBillingAddress(): ?Address;
-    public function setDeliveryAddress(Address $address);
-    public function getDeliveryAddress(): ?Address;
+    public function sum(): Money;
+    public function updateSum(): Money;
+    public function updateBillingAddress(Address $address);
+    public function billingAddress(): ?Address;
+    public function updateDeliveryAddress(Address $address);
+    public function deliveryAddress(): ?Address;
     public function sellers(): OrderSellerCollection;
 }
 interface OrderSellerCollection {
